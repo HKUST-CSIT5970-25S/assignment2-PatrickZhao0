@@ -54,6 +54,22 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			int wordLength = words.length;
+			for (int i=0; i< wordLength - 1; i++) {
+				if (words[i].length() == 0) {
+					continue;
+				}
+				KEY.set(words[i]);
+				STRIPE.increment("");
+				context.write(KEY,STRIPE);
+				STRIPE.clear();
+				if (words[i+1].length() == 0) {
+					continue;
+				}
+				STRIPE.increment(words[i+1]);
+				context.write(KEY,STRIPE);
+				STRIPE.clear();
+			}
 		}
 	}
 
@@ -67,7 +83,7 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 		private final static HashMapStringIntWritable SUM_STRIPES = new HashMapStringIntWritable();
 		private final static PairOfStrings BIGRAM = new PairOfStrings();
 		private final static FloatWritable FREQ = new FloatWritable();
-
+		private static float leftCount = 0f;
 		@Override
 		public void reduce(Text key,
 				Iterable<HashMapStringIntWritable> stripes, Context context)
@@ -75,6 +91,29 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			public void reduce(Text key,
+				Iterable<HashMapStringIntWritable> stripes, Context context)
+				throws IOException, InterruptedException {
+
+				for(HashMapStringIntWritable stripe : stripes){
+					SUM_STRIPES.plus(stripe);
+				}
+				for(String nextWord : SUM_STRIPES.keySet()){
+					if (nextWord.length() == 0){
+						leftCount= SUM_STRIPES.get("");
+						FREQ.set(leftCount);
+						BIGRAM.set(key.toString(), "");
+						context.write(BIGRAM, FREQ);
+						continue;
+					}
+					else{
+						FREQ.set((float)SUM_STRIPES.get(nextWord)/leftCount);
+						BIGRAM.set(key.toString(), nextWord);
+						context.write(BIGRAM, FREQ);
+					}
+				}
+				SUM_STRIPES.clear();
+			}
 		}
 	}
 
@@ -91,9 +130,11 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 		public void reduce(Text key,
 				Iterable<HashMapStringIntWritable> stripes, Context context)
 				throws IOException, InterruptedException {
-			/*
-			 * TODO: Your implementation goes here.
-			 */
+			for(HashMapStringIntWritable stripe : stripes){
+					SUM_STRIPES.plus(stripe);
+			}
+			context.write(key, SUM_STRIPES);
+			SUM_STRIPES.clear();
 		}
 	}
 
