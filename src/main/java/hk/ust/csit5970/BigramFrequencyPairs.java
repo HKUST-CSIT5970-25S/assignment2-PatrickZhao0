@@ -40,7 +40,6 @@ public class BigramFrequencyPairs extends Configured implements Tool {
 	private static class MyMapper extends
 			Mapper<LongWritable, Text, PairOfStrings, IntWritable> {
 
-		// Reuse objects to save overhead of object creation.
 		private static final IntWritable ONE = new IntWritable(1);
 		private static final PairOfStrings BIGRAM = new PairOfStrings();
 
@@ -50,9 +49,16 @@ public class BigramFrequencyPairs extends Configured implements Tool {
 			String line = ((Text) value).toString();
 			String[] words = line.trim().split("\\s+");
 			
-			/*
-			 * TODO: Your implementation goes here.
-			 */
+			Int wordLength = word.length;
+			for (int i=0; i < wordLength - 1; i++) {
+				if (words[i].length() == 0) {
+					continue;
+				}
+				BIGRAM.set(words[i],"");
+				context.write(BIGRAM, ONE);
+				BIGRAM.set(words[i], words[i+1]);
+				context.write(BIGRAM, ONE);
+			}
 		}
 	}
 
@@ -64,6 +70,7 @@ public class BigramFrequencyPairs extends Configured implements Tool {
 
 		// Reuse objects.
 		private final static FloatWritable VALUE = new FloatWritable();
+		private static float leftCount = 0;
 
 		@Override
 		public void reduce(PairOfStrings key, Iterable<IntWritable> values,
@@ -71,6 +78,19 @@ public class BigramFrequencyPairs extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			float sum = 0f;
+		    for (IntWritable v: values) {
+		         sum += v.get();
+		    }
+		    if(key.getRightElement().toString().equals("")){
+		    	leftCount = sum;
+		    	VALUE.set(leftCount);
+		    	context.write(key, VALUE);
+		    }
+		    else{
+		    	VALUE.set(sum /(float) leftCount);
+		    	context.write(key, VALUE);
+		    }
 		}
 	}
 	
@@ -84,6 +104,19 @@ public class BigramFrequencyPairs extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			int sum = 0;
+			
+			java.util.List<IntWritable> valueList = new java.util.ArrayList<IntWritable>();
+			for (IntWritable val : values) {
+				valueList.add(new IntWritable(val.get()));
+			}
+
+			for (int i = 0; i < valueList.size(); i++) {
+				sum += valueList.get(i).get();
+			}
+			
+			SUM.set(sum);
+			context.write(key, SUM);
 		}
 	}
 
