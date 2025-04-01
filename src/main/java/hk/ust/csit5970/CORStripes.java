@@ -43,6 +43,11 @@ public class CORStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			while (doc_tokenizer.hasMoreTokens()) {
+    			String token = doc_tokenizer.nextToken();
+				word.set(token);
+				context.write(word, ONE);
+			}
 		}
 	}
 
@@ -56,6 +61,13 @@ public class CORStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			Iterator<IntWritable> iterator = values.iterator();
+			int sum = 0;
+			while (iterator.hasNext()) {
+				sum += iterator.next().get();
+			}
+			SUM.set(sum);
+			context.write(key, SUM);
 		}
 	}
 
@@ -75,6 +87,23 @@ public class CORStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			List<String> wordList = new ArrayList<String>(sorted_word_set);
+			for (int i = 0; i < wordList.size(); i++) {
+                String left = wordList.get(i);
+                for (int j = i + 1; j < wordList.size(); j++) {
+                    String right = wordList.get(j);
+                    STRIPE.increment(right);
+                }
+                KEY.set(left);
+                for (Map.Entry<String, Integer> entry : STRIPE.entrySet()) {
+					MAP_key.set(entry.getKey());
+					MAP_entry.set(entry.getValue());
+                    MAP.put(MAP_key, MAP_entry);
+                }
+                context.write(KEY, MAP);
+				STRIPE.clear();
+				MAP.clear();
+            }
 		}
 	}
 
@@ -89,7 +118,22 @@ public class CORStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
-		}
+			for (MapWritable stripe : values) {
+                for (Map.Entry<Writable, Writable> entry : stripe.entrySet()) {
+                    String neighbor = ((Text) entry.getKey()).toString();
+                    int count = ((IntWritable) entry.getValue()).get();
+                    Combined_STRIPE.increment(neighbor, count);
+                }
+            }
+            for (Map.Entry<String, Integer> entry : Combined_STRIPE.entrySet()) {
+				MAP_key.set(entry.getKey());
+				MAP_entry.set(entry.getValue());
+                output.put(MAP_key, MAP_entry);
+            }
+            context.write(key, output);
+			Combined_STRIPE.clear();
+			output.clear();
+		}	
 	}
 
 	/*
@@ -98,7 +142,10 @@ public class CORStripes extends Configured implements Tool {
 	public static class CORStripesReducer2 extends Reducer<Text, MapWritable, PairOfStrings, DoubleWritable> {
 		private static Map<String, Integer> word_total_map = new HashMap<String, Integer>();
 		private static IntWritable ZERO = new IntWritable(0);
+		private static final HashMapStringIntWritable LAST_STRIPE = new HashMapStringIntWritable();
 
+		private static PairOfStrings outputKey = new PairOfStrings();
+		private static DoubleWritable outputValue = new DoubleWritable();
 		/*
 		 * Preload the middle result file.
 		 * In the middle result file, each line contains a word and its frequency Freq(A), seperated by "\t"
@@ -142,6 +189,42 @@ public class CORStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			for (MapWritable stripe : values) {
+				for (Map.Entry<Writable, Writable> entry : stripe.entrySet()) {
+					String neighbor = ((Text) entry.getKey()).toString();
+					int count =((IntWritable) entry.getValue()).get();
+					LAST_STRIPE.increment(neighbor, count);
+				}
+			}
+
+			String left = key.toString();
+			int left_count;
+			if( word_total_map.containsKey(left))
+			{ 
+				left_count = word_total_map.get(left) ;
+			}
+			else{
+				left_count = 0;
+			}
+			
+			for (Map.Entry<String, Integer> entry : LAST_STRIPE.entrySet()) {
+				String right = entry.getKey();
+				int count = entry.getValue();
+
+				int right_count;
+				if (word_total_map.containsKey(right)){ 
+					right_count= word_total_map.get(right);
+				}
+				else {
+					right_count= 0;
+				}
+
+				double cor = (double) count / (left_count * right_count);
+				outputKey.set(left, right);
+				outputValue.set(cor);
+				context.write(outputKey, outputValue);
+			}
+			LAST_STRIPE.clear();
 		}
 	}
 
