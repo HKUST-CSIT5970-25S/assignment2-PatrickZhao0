@@ -4,7 +4,7 @@
 ### Deadline: April, 1st, 23:59 (Tuesday)
 
 ---
-
+j
 ## MapReduce Programming
 
 In this assignment, you will write MapReduce code that counts the bigrams appeared in a text file, using the two design patterns taught in class. Please follow these instructions carefully!
