@@ -1,0 +1,61 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--------------------< [0;36mhk.ust.csit5970:assignment-2[0;1m >--------------------[m
+[[1;34mINFO[m] [1mBuilding assignment-2 1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:2.5:clean[m [1m(default-clean)[m @ [36massignment-2[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36massignment-2[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36massignment-2[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 13 source files to /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/target/classes
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,25] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,32] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,43] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,41] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,68] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,75] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,84] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,85] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,92] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,40] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,51] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,53] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,73] ';' expected
+[[1;34mINFO[m] 13 errors 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  0.892 s
+[[1;34mINFO[m] Finished at: 2025-04-12T05:33:49Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.1:compile[m [1m(default-compile)[m on project [36massignment-2[m: [1;31mCompilation failure[m: Compilation failure: 
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,25] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,32] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[94,43] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,41] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,68] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,75] illegal start of expression
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,84] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,85] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[95,92] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,40] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,51] ';' expected
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,53] not a statement
+[[1;31mERROR[m] /home/ubuntu/CSIT5970/assignment-2/assignment2-PatrickZhao0/src/main/java/hk/ust/csit5970/BigramFrequencyStripes.java:[96,73] ';' expected
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
