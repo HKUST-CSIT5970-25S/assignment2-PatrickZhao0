@@ -1,0 +1,5 @@
+====BigramFrePairs==== Mark: 0/2: '====BigramFrePairs====' is not in list
+====BigramFreStripes==== Mark: 0/2: local variable 'i2' referenced before assignment
+====CorPairs==== Mark: 0/3: list index out of range
+====CorStrip==== Mark: 0/3: list index out of range
+====Total Mark: 0/10
